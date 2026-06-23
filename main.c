@@ -3,6 +3,18 @@
 //jogador 1 = 0, jogador 2 = 1
 //1 = o, 4 = x
 
+void desenharTabuleiro(int tabuleiro[3][3]){
+    for (int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            printf(" %d ", tabuleiro[i][j]);
+            if (j < 2)
+                printf(" | ");
+        }
+        printf("\n");
+        if (i < 2)
+            printf("---------------\n");
+    }
+}
 void marcarJogada(int x, int y, int jogador){
     int tabuleiro[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
 
@@ -12,12 +24,7 @@ void marcarJogada(int x, int y, int jogador){
         tabuleiro[x][y] = 4;
     }
 
-    for(int i = 0; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            printf("%d\n", tabuleiro[j][i]);
-        }
-    }
-
+    desenharTabuleiro(tabuleiro);
 }
 
 int main(){
