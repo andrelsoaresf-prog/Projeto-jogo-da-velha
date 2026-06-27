@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "funcoes.h"
+#include "tabuleiro.h"
+#include "partida.h"
 #include <stdlib.h>
 
 int main(){
