@@ -12,6 +12,7 @@ int main(){
             tabuleiro[i][j] = 0;
         }
     }
+
     int x=0, y=0, jogador=0;
   
     configuraJogadores(&jogador);

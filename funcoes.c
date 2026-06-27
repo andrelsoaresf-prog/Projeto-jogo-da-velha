@@ -1,6 +1,7 @@
 #include "funcoes.h"
 #include <stdio.h>
 
+
 int temVencedor(int **tabuleiro){
     int soma = 0;
 
@@ -33,6 +34,7 @@ int temVencedor(int **tabuleiro){
     for (int i = 0; i < 3; i++){
         soma += tabuleiro[i][i];
     }
+
     if (soma == 3)
             return 1;
         else if (soma == 12)
@@ -81,11 +83,6 @@ void marcarJogada(int x, int y, int jogador, int **tabuleiro){
     }
 
     desenharTabuleiro(tabuleiro);
-
-    if (temVencedor(tabuleiro) == 1)
-        printf("jogador 1 ganhou");
-    else if (temVencedor(tabuleiro) == 2)
-        printf("jogador 2 ganhou");
 }
 
 void joga(int x, int y, int jogador, int **tabuleiro){
@@ -112,10 +109,6 @@ void configuraJogadores(int *jogador){
     }
 }
 
-typedef struct {
-    int rodada, jogador;
-} partida;
-
 void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
     ctrlPartida.rodada = 1; ctrlPartida.jogador = jogador;
     while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
@@ -127,7 +120,7 @@ void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
             ctrlPartida.jogador = 1;
         }
     }
-    while(temVencedor(**tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
+    while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
         joga(x, y, jogador, tabuleiro);
         ctrlPartida.rodada++;
         if(ctrlPartida.rodada%2 == 0){
@@ -138,7 +131,7 @@ void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
     }
 
     if(ctrlPartida.rodada == 10){
-        printf("Resultado: Empate!");
+        printf("Resultado: Empate! Deu velha!!");
     }
 
     if(temVencedor(tabuleiro) == 1){
