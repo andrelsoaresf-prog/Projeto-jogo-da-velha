@@ -116,20 +116,22 @@ void configuraJogadores(int *jogador){
 }
 
 void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
-    ctrlPartida.rodada = 1; ctrlPartida.jogador = jogador;
+    ctrlPartida.rodada = 1; 
+    ctrlPartida.jogador = jogador;
+    
     while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
         joga(x, y, ctrlPartida.jogador, tabuleiro);
         ctrlPartida.rodada++;
-        if(ctrlPartida.rodada%2 == 0){
+        if(ctrlPartida.rodada % 2 == 0){
             ctrlPartida.jogador = 2;
         } else{
             ctrlPartida.jogador = 1;
         }
     }
     while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
-        joga(x, y, jogador, tabuleiro);
+        joga(x, y, ctrlPartida.jogador, tabuleiro);
         ctrlPartida.rodada++;
-        if(ctrlPartida.rodada%2 == 0){
+        if(ctrlPartida.rodada % 2 == 0){
             ctrlPartida.jogador = 1;
         } else{
             ctrlPartida.jogador = 2;
