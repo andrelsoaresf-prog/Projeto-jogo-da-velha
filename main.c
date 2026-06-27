@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "tabuleiro.h"
 #include "partida.h"
+#include "jogadorIA.h"
 #include <stdlib.h>
 
 int main(){
@@ -14,11 +15,18 @@ int main(){
         }
     }
 
-    int jogador = 0;
+    int jogador = 0, selecionar = 0;
+
+    selecionarModo(&selecionar);
   
-    configuraJogadores(&jogador);
-    desenharTabuleiro(tabuleiro);
-    inicia(jogador, tabuleiro);
+    if (selecionar == 1){
+        configuraJogadores(&jogador);
+        desenharTabuleiro(tabuleiro);
+        inicia(jogador, tabuleiro);
+    } 
+    else if (selecionar == 2){
+        printf("eita resenha");
+    }
 
     for (int i = 0; i < 3; i++){
         free(tabuleiro[i]);
