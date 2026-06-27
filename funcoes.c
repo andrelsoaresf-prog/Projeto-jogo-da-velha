@@ -1,7 +1,6 @@
 #include "funcoes.h"
 #include <stdio.h>
 
-
 int temVencedor(int **tabuleiro){
     int soma = 0;
 
@@ -56,20 +55,27 @@ int temVencedor(int **tabuleiro){
     return 0;
 }
 
-void desenharTabuleiro(int **tabuleiro){
-
+void desenharTabuleiro(int **tabuleiro){ 
     printf("\033[2J\033[H");
+    printf("\n");
 
     for (int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            printf(" %d ", tabuleiro[i][j]);
+            if (tabuleiro[i][j] == 0)
+                printf(".");
+            else if (tabuleiro[i][j] == 1)
+                printf("o");
+            else if (tabuleiro[i][j] == 4)
+                printf("x");
+            
             if (j < 2)
                 printf(" | ");
         }
         printf("\n");
         if (i < 2)
-            printf("---------------\n");
+            printf("----------\n");
     }
+    
 }
 
 void marcarJogada(int x, int y, int jogador, int **tabuleiro){
@@ -99,7 +105,7 @@ void joga(int x, int y, int jogador, int **tabuleiro){
 
 void configuraJogadores(int *jogador){
     int selecao;
-    printf("\nDefina quem vai jogar primeiro (1 para circulo, 2 para cruz): "); scanf("%d", &selecao);
+    printf("\nDefina quem vai jogar primeiro (1 para o, 2 para x): "); scanf("%d", &selecao);
 
     if (selecao != 1 && selecao != 2){
         printf("\nNumero invalido! Digite novamente!");
@@ -130,7 +136,7 @@ void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
         }
     }
 
-    if(ctrlPartida.rodada == 10){
+    if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
         printf("Resultado: Empate! Deu velha!!");
     }
 
