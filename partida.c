@@ -14,12 +14,13 @@ void configuraJogadores(int *jogador){
     }
 }
 
-void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
+void inicia(int jogador, int **tabuleiro){
+    partida ctrlPartida;
     ctrlPartida.rodada = 1; 
     ctrlPartida.jogador = jogador;
     
     while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
-        joga(x, y, ctrlPartida.jogador, tabuleiro);
+        joga(ctrlPartida.jogador, tabuleiro);
         ctrlPartida.rodada++;
         if(ctrlPartida.rodada % 2 == 0){
             ctrlPartida.jogador = 2;
@@ -28,7 +29,7 @@ void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
         }
     }
     while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
-        joga(x, y, ctrlPartida.jogador, tabuleiro);
+        joga(ctrlPartida.jogador, tabuleiro);
         ctrlPartida.rodada++;
         if(ctrlPartida.rodada % 2 == 0){
             ctrlPartida.jogador = 1;
@@ -50,7 +51,8 @@ void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro){
     }
 }
 
-void joga(int x, int y, int jogador, int **tabuleiro){
+void joga(int jogador, int **tabuleiro){
+    int x, y;
 
     printf("\nDefina a linha da jogada: "); scanf("%d", &x);
     printf("\nDefina a coluna da jogada: "); scanf("%d", &y);
@@ -58,6 +60,6 @@ void joga(int x, int y, int jogador, int **tabuleiro){
         marcarJogada(x, y, jogador, tabuleiro);
     } else{
         printf("\nPosicao invalida! Escolha novamente!");
-        joga(x, y, jogador, tabuleiro);
+        joga(jogador, tabuleiro);
     }
 }

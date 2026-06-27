@@ -7,7 +7,7 @@ typedef struct {
 } partida;
 
 void configuraJogadores(int *jogador);
-void inicia(partida ctrlPartida, int jogador, int x, int y, int **tabuleiro);
-void joga(int x, int y, int jogador, int **tabuleiro);
+void inicia(int jogador, int **tabuleiro);
+void joga(int jogador, int **tabuleiro);
 
 #endif

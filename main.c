@@ -14,12 +14,11 @@ int main(){
         }
     }
 
-    int x=0, y=0, jogador=0;
+    int jogador = 0;
   
     configuraJogadores(&jogador);
-    partida ctrlPartida = {1, jogador};
     desenharTabuleiro(tabuleiro);
-    inicia(ctrlPartida, jogador, x, y, tabuleiro);
+    inicia(jogador, tabuleiro);
 
     for (int i = 0; i < 3; i++){
         free(tabuleiro[i]);
