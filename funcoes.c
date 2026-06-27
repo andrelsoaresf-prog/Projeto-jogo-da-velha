@@ -100,12 +100,15 @@ void joga(int x, int y, int jogador, int **tabuleiro){
 }
 }
 
-void configuraJogadores(int jogador){
-    printf("\nDefina quem vai jogar primeiro (1 para circulo, 2 para cruz): "); scanf("%d", &jogador);
+void configuraJogadores(int *jogador){
+    int selecao;
+    printf("\nDefina quem vai jogar primeiro (1 para circulo, 2 para cruz): "); scanf("%d", &selecao);
 
-    if (jogador != 1 && jogador != 2){
+    if (selecao != 1 && selecao != 2){
         printf("\nNumero invalido! Digite novamente!");
         configuraJogadores(jogador);
+    } else {
+        *jogador = selecao;
     }
 }
 

@@ -14,7 +14,7 @@ int main(){
     }
     int x=0, y=0, jogador=0;
   
-    configuraJogadores(jogador);
+    configuraJogadores(&jogador);
     partida ctrlPartida = {1, jogador};
     desenharTabuleiro(tabuleiro);
     inicia(ctrlPartida, jogador, x, y, tabuleiro);
