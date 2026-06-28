@@ -3,5 +3,6 @@
 
 void selecionarModo(int *selecionar);
 void regras(int **tabuleiro);
+void aleatorio(int **tabuleiro);
 
 #endif

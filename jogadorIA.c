@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "jogadorIA.h"
 #include <stdlib.h>
+#include <time.h>
 
 void selecionarModo(int *selecionar){
     int opcao;
@@ -44,4 +45,17 @@ void regras(int **tabuleiro){
         //regra 5
     }
     
+
+}
+
+void aleatorio(int **tabuleiro){
+    srand(time(NULL));
+    int x = rand() % 4;
+    int y = rand() % 4;
+    if (tabuleiro[x][y] == 0){
+        tabuleiro[x][y] = 4;
+    } else{
+        aleatorio(tabuleiro);
+    }
+
 }
