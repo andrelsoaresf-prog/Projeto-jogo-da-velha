@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <time.h>
 #include "tabuleiro.h"
 #include "partida.h"
 #include "jogadorIA.h"
 #include <stdlib.h>
 
 int main(){
+    srand(time(NULL));
+
     int **tabuleiro = malloc(3 * sizeof(int *));
     for (int i = 0; i < 3; i++){
         tabuleiro[i] = malloc(3 * sizeof(int));

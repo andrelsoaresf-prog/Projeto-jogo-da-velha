@@ -56,7 +56,6 @@ void regras(int **tabuleiro){
 }
 
 void aleatorio(int **tabuleiro){
-    srand(time(NULL));
     int x = rand() % 3;
     int y = rand() % 3;
     if (tabuleiro[x][y] == 0){
