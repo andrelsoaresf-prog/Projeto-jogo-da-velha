@@ -1,9 +1,13 @@
 #include <stdio.h>
+#include <time.h>
 #include "tabuleiro.h"
 #include "partida.h"
+#include "jogadorIA.h"
 #include <stdlib.h>
 
 int main(){
+    srand(time(NULL));
+
     int **tabuleiro = malloc(3 * sizeof(int *));
     for (int i = 0; i < 3; i++){
         tabuleiro[i] = malloc(3 * sizeof(int));
@@ -14,11 +18,18 @@ int main(){
         }
     }
 
-    int jogador = 0;
+    int jogador = 1, selecionar = 0;
+
+    selecionarModo(&selecionar);
   
-    configuraJogadores(&jogador);
-    desenharTabuleiro(tabuleiro);
-    inicia(jogador, tabuleiro);
+    if (selecionar == 1){
+        configuraJogadores(&jogador);
+        desenharTabuleiro(tabuleiro);
+        inicia(jogador, tabuleiro, selecionar);
+    } 
+    else if (selecionar == 2){
+        inicia(jogador, tabuleiro, selecionar);
+    }
 
     for (int i = 0; i < 3; i++){
         free(tabuleiro[i]);
