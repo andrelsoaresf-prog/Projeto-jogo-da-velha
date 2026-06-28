@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "jogadorIA.h"
+#include "tabuleiro.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -19,7 +20,7 @@ void selecionarModo(int *selecionar){
 
 void regras(int **tabuleiro){
     if (tabuleiro[1][1] == 0){
-        tabuleiro[1][1] == 4;
+        tabuleiro[1][1] = 4;
         //regra 3
 
     } 
@@ -51,6 +52,7 @@ void regras(int **tabuleiro){
         aleatorio(tabuleiro);
     }
 
+    desenharTabuleiro(tabuleiro);
 }
 
 void aleatorio(int **tabuleiro){

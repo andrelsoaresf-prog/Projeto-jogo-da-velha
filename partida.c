@@ -1,6 +1,7 @@
 #include "partida.h"
 #include <stdio.h>
 #include "tabuleiro.h"
+#include "jogadorIA.h"
 
 void configuraJogadores(int *jogador){
     int selecao;
@@ -14,40 +15,63 @@ void configuraJogadores(int *jogador){
     }
 }
 
-void inicia(int jogador, int **tabuleiro){
+void inicia(int jogador, int **tabuleiro, int opcao){
     partida ctrlPartida;
     ctrlPartida.rodada = 1; 
     ctrlPartida.jogador = jogador;
     
-    while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
-        joga(ctrlPartida.jogador, tabuleiro);
-        ctrlPartida.rodada++;
-        if(ctrlPartida.rodada % 2 == 0){
-            ctrlPartida.jogador = 2;
-        } else{
-            ctrlPartida.jogador = 1;
+    if (opcao == 1){
+        while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
+            joga(ctrlPartida.jogador, tabuleiro);
+            ctrlPartida.rodada++;
+            if(ctrlPartida.rodada % 2 == 0){
+                ctrlPartida.jogador = 2;
+            } else{
+                ctrlPartida.jogador = 1;
+            }
         }
-    }
-    while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
-        joga(ctrlPartida.jogador, tabuleiro);
-        ctrlPartida.rodada++;
-        if(ctrlPartida.rodada % 2 == 0){
-            ctrlPartida.jogador = 1;
-        } else{
-            ctrlPartida.jogador = 2;
+        while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
+            joga(ctrlPartida.jogador, tabuleiro);
+            ctrlPartida.rodada++;
+            if(ctrlPartida.rodada % 2 == 0){
+                ctrlPartida.jogador = 1;
+            } else{
+                ctrlPartida.jogador = 2;
+            }
         }
-    }
 
-    if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
+        if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
         printf("Resultado: Empate! Deu velha!!");
-    }
+        }
 
-    if(temVencedor(tabuleiro) == 1){
-        printf("Resultado: Jogador 1 venceu!");
-    } 
+        if(temVencedor(tabuleiro) == 1){
+            printf("Resultado: Jogador 1 venceu!");
+        } 
     
-    if(temVencedor(tabuleiro) == 2){
-        printf("Resultado: Jogador 2 venceu!");
+        if(temVencedor(tabuleiro) == 2){
+            printf("Resultado: Jogador 2 venceu!");
+        }
+
+    } else 
+    if (opcao == 2){
+        while (temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
+            if (ctrlPartida.rodada % 2 == 1){
+                regras(tabuleiro);
+                ctrlPartida.rodada++;
+            }
+            else {
+                joga(ctrlPartida.jogador, tabuleiro);
+                ctrlPartida.rodada++;
+            }
+        }
+        if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
+        printf("Resultado: Empate! Deu velha!!");
+        }
+
+        if(temVencedor(tabuleiro) == 2){
+            printf("Resultado: A IA venceu!");
+        }
+        
     }
 }
 

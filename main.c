@@ -15,17 +15,17 @@ int main(){
         }
     }
 
-    int jogador = 0, selecionar = 0;
+    int jogador = 1, selecionar = 0;
 
     selecionarModo(&selecionar);
   
     if (selecionar == 1){
         configuraJogadores(&jogador);
         desenharTabuleiro(tabuleiro);
-        inicia(jogador, tabuleiro);
+        inicia(jogador, tabuleiro, selecionar);
     } 
     else if (selecionar == 2){
-        printf("eita resenha");
+        inicia(jogador, tabuleiro, selecionar);
     }
 
     for (int i = 0; i < 3; i++){
