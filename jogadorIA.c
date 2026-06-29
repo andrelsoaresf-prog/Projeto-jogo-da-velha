@@ -19,66 +19,6 @@ void selecionarModo(int *selecionar){
 }
 
 void regras(int **tabuleiro){
-    if(tabuleiro[0][0] + tabuleiro[0][1] == 2 && tabuleiro[0][2] == 0){
-        tabuleiro[0][2] = 4;
-    }
-    else if (tabuleiro[0][1] + tabuleiro[0][2] == 2 && tabuleiro[0][0] == 0){
-        tabuleiro[0][0] = 4;
-    }
-    else if (tabuleiro[0][0] + tabuleiro[0][2] == 2 && tabuleiro[0][1] == 0){
-        tabuleiro[0][1] = 4;
-    }
-    else if (tabuleiro[1][0] + tabuleiro[1][1] == 2 && tabuleiro[1][2] ==0){
-        tabuleiro[1][2] = 4;
-    }
-    else if (tabuleiro[1][1] + tabuleiro[1][2] == 2 && tabuleiro[1][0] == 0){
-        tabuleiro[1][0] = 4;
-    }
-    else if (tabuleiro[1][0] + tabuleiro[1][2] == 2 && tabuleiro[1][1] == 0){
-        tabuleiro[1][1] = 4;
-    }
-    else if (tabuleiro[2][0] + tabuleiro[2][1] == 2 && tabuleiro[2][2] == 0){
-        tabuleiro[2][2] = 4;
-    }
-    else if (tabuleiro[2][1] + tabuleiro[2][2] == 2 && tabuleiro[2][0] == 0){
-        tabuleiro[2][0] = 4;
-    }
-    else if (tabuleiro[2][0] + tabuleiro[2][2] == 2 && tabuleiro[2][1] == 0){
-        tabuleiro[2][1] = 4;
-    }
-    //regra 1: sequencias horizontais feitas pelo jogador
-
-    else 
-    if (tabuleiro[0][0] + tabuleiro[1][0] == 2 && tabuleiro[2][0] == 0){
-        tabuleiro[2][0] = 4;
-    }
-    else if (tabuleiro[1][0] + tabuleiro[2][0] == 2 && tabuleiro[0][0] == 0){
-        tabuleiro[0][0] = 4;
-    }
-    else if (tabuleiro[0][0] + tabuleiro[2][0] == 2 && tabuleiro[1][0] == 0){
-        tabuleiro[1][0] = 4;
-    }
-    else if (tabuleiro[0][1] + tabuleiro[1][1] == 2 && tabuleiro[2][1] == 0){
-        tabuleiro[2][1] = 4;
-    }
-    else if (tabuleiro[1][1] + tabuleiro[2][1] == 2 && tabuleiro[0][1] == 0){
-        tabuleiro[0][1] = 4;
-    }
-    else if (tabuleiro[0][1] + tabuleiro[2][1] == 2 && tabuleiro[1][1] == 0){
-        tabuleiro[1][1] = 4;
-    }
-    else if (tabuleiro[0][2] + tabuleiro[1][2] == 2 && tabuleiro[2][2] == 0){
-        tabuleiro[2][2] = 4;
-    }
-    else if (tabuleiro[1][2] + tabuleiro[2][2] == 2 && tabuleiro[0][2] == 0){
-        tabuleiro[0][2] = 4;
-    }
-    else if (tabuleiro[0][2] + tabuleiro[2][2] == 2 && tabuleiro[1][2] == 0){
-        tabuleiro[1][2] = 4;
-    }
-    //regra 1: sequencias verticais feitas pelo jogador
-
-    else
     if(tabuleiro[0][0] + tabuleiro[0][1] == 8 && tabuleiro[0][2] == 0){
         tabuleiro[0][2] = 4;
     }
@@ -152,6 +92,66 @@ void regras(int **tabuleiro){
         tabuleiro[2][0] = 4;
     }
     //regra 1: sequencias diagonais feitas pela maquina
+    
+    else
+    if(tabuleiro[0][0] + tabuleiro[0][1] == 2 && tabuleiro[0][2] == 0){
+        tabuleiro[0][2] = 4;
+    }
+    else if (tabuleiro[0][1] + tabuleiro[0][2] == 2 && tabuleiro[0][0] == 0){
+        tabuleiro[0][0] = 4;
+    }
+    else if (tabuleiro[0][0] + tabuleiro[0][2] == 2 && tabuleiro[0][1] == 0){
+        tabuleiro[0][1] = 4;
+    }
+    else if (tabuleiro[1][0] + tabuleiro[1][1] == 2 && tabuleiro[1][2] ==0){
+        tabuleiro[1][2] = 4;
+    }
+    else if (tabuleiro[1][1] + tabuleiro[1][2] == 2 && tabuleiro[1][0] == 0){
+        tabuleiro[1][0] = 4;
+    }
+    else if (tabuleiro[1][0] + tabuleiro[1][2] == 2 && tabuleiro[1][1] == 0){
+        tabuleiro[1][1] = 4;
+    }
+    else if (tabuleiro[2][0] + tabuleiro[2][1] == 2 && tabuleiro[2][2] == 0){
+        tabuleiro[2][2] = 4;
+    }
+    else if (tabuleiro[2][1] + tabuleiro[2][2] == 2 && tabuleiro[2][0] == 0){
+        tabuleiro[2][0] = 4;
+    }
+    else if (tabuleiro[2][0] + tabuleiro[2][2] == 2 && tabuleiro[2][1] == 0){
+        tabuleiro[2][1] = 4;
+    }
+    //regra 1: sequencias horizontais feitas pelo jogador
+
+    else 
+    if (tabuleiro[0][0] + tabuleiro[1][0] == 2 && tabuleiro[2][0] == 0){
+        tabuleiro[2][0] = 4;
+    }
+    else if (tabuleiro[1][0] + tabuleiro[2][0] == 2 && tabuleiro[0][0] == 0){
+        tabuleiro[0][0] = 4;
+    }
+    else if (tabuleiro[0][0] + tabuleiro[2][0] == 2 && tabuleiro[1][0] == 0){
+        tabuleiro[1][0] = 4;
+    }
+    else if (tabuleiro[0][1] + tabuleiro[1][1] == 2 && tabuleiro[2][1] == 0){
+        tabuleiro[2][1] = 4;
+    }
+    else if (tabuleiro[1][1] + tabuleiro[2][1] == 2 && tabuleiro[0][1] == 0){
+        tabuleiro[0][1] = 4;
+    }
+    else if (tabuleiro[0][1] + tabuleiro[2][1] == 2 && tabuleiro[1][1] == 0){
+        tabuleiro[1][1] = 4;
+    }
+    else if (tabuleiro[0][2] + tabuleiro[1][2] == 2 && tabuleiro[2][2] == 0){
+        tabuleiro[2][2] = 4;
+    }
+    else if (tabuleiro[1][2] + tabuleiro[2][2] == 2 && tabuleiro[0][2] == 0){
+        tabuleiro[0][2] = 4;
+    }
+    else if (tabuleiro[0][2] + tabuleiro[2][2] == 2 && tabuleiro[1][2] == 0){
+        tabuleiro[1][2] = 4;
+    }
+    //regra 1: sequencias verticais feitas pelo jogador
 
     else
     if (tabuleiro[0][0] + tabuleiro[2][2] == 8 && tabuleiro[1][0] + tabuleiro[2][0] + tabuleiro[2][1] == 0 && tabuleiro[1][1] == 1){
@@ -167,7 +167,7 @@ void regras(int **tabuleiro){
         tabuleiro[0][0] = 4;
     }
     //regra 2: ataque duplo pelos cantos, quando o meio esta ocupado
-    
+
     else
     if (tabuleiro[0][0] + tabuleiro[2][0] == 8 && tabuleiro[1][1] == 0){
         tabuleiro[1][1] = 4;
