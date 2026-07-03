@@ -8,6 +8,5 @@ typedef struct {
 
 void configuraJogadores(int *jogador);
 void inicia(int jogador, int **tabuleiro);
-void joga(int jogador, int **tabuleiro);
 
 #endif
