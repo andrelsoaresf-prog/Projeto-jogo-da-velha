@@ -1,52 +1,57 @@
 #include "partida.h"
 #include <stdio.h>
 #include "tabuleiro.h"
+#include "jogadorTeclado.h"
 
-void configuraJogadores(int *jogador){
+void configuraJogadores(Jogador *jogador){
     int selecao;
-    printf("\nDefina quem vai jogar primeiro (1 para o, 2 para x): "); scanf("%d", &selecao);
+    printf("\nDefina quem vai jogar primeiro\n");
+    printf("Digite 1 para o\n");
+    printf("Digite 2 para x\n"); 
+    scanf("%d", &selecao);
 
     if (selecao != 1 && selecao != 2){
         printf("\nNumero invalido! Digite novamente!");
         configuraJogadores(jogador);
     } else {
-        *jogador = selecao;
+        jogador->tipo = selecao;
     }
 }
 
-void inicia(int jogador, int **tabuleiro){
-    partida ctrlPartida;
-    ctrlPartida.rodada = 1; 
-    ctrlPartida.jogador = jogador;
-    
-    while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
-        joga(ctrlPartida.jogador, tabuleiro);
-        ctrlPartida.rodada++;
-        if(ctrlPartida.rodada % 2 == 0){
-            ctrlPartida.jogador = 2;
-        } else{
-            ctrlPartida.jogador = 1;
-        }
-    }
-    while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
-        joga(ctrlPartida.jogador, tabuleiro);
-        ctrlPartida.rodada++;
-        if(ctrlPartida.rodada % 2 == 0){
-            ctrlPartida.jogador = 1;
-        } else{
-            ctrlPartida.jogador = 2;
+
+void inicia(){
+    Tabuleiro tabela;
+    Jogador jogadorAtual;
+    int rodada = 0;
+
+    configuraJogadores(&jogadorAtual);
+
+    for(int i = 0; i < 2; i++){
+        for(int j = 0; j < 2; j++){
+            tabela.M[i][j] = 0;
         }
     }
 
-    if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
+    desenharTabuleiro(&tabela);
+
+    while (temVencedor(&tabela) == 0 && rodada < 10){
+        joga(jogadorAtual.tipo, &tabela);
+        rodada++;
+        if (jogadorAtual.tipo == 1)
+            jogadorAtual.tipo = 2;
+        else
+            jogadorAtual.tipo = 1;
+    }
+    
+    if(rodada == 10 && temVencedor(&tabela) == 0){
         printf("Resultado: Empate! Deu velha!!");
     }
 
-    if(temVencedor(tabuleiro) == 1){
+    if(temVencedor(&tabela) == 1){
         printf("Resultado: Jogador 1 venceu!");
     } 
     
-    if(temVencedor(tabuleiro) == 2){
+    if(temVencedor(&tabela) == 2){
         printf("Resultado: Jogador 2 venceu!");
     }
 }

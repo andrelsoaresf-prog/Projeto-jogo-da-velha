@@ -1,17 +1,18 @@
 #include "jogadorTeclado.h"
 #include <stdio.h>
 #include "partida.h"
+#include "tabuleiro.h"
 
 
-void joga(int jogador, int **tabuleiro){
-    int x, y;
+void joga(int jogador, Tabuleiro *tabela){
+    jogada posicao;
 
-    printf("\nDefina a linha da jogada: "); scanf("%d", &x);
-    printf("\nDefina a coluna da jogada: "); scanf("%d", &y);
-    if (x>=0 && x<3 && y>=0 && y<3 && tabuleiro[x][y]==0){
-        marcarJogada(x, y, jogador, tabuleiro);
+    printf("\nDefina a linha da jogada: "); scanf("%d", &posicao.x);
+    printf("\nDefina a coluna da jogada: "); scanf("%d", &posicao.y);
+    if (posicao.x>=0 && posicao.x<3 && posicao.y>=0 && posicao.y<3 && tabela->M[posicao.x][posicao.y]==0){
+        marcarJogada(posicao, jogador, tabela);
     } else{
         printf("\nPosicao invalida! Escolha novamente!");
-        joga(jogador, tabuleiro);
+        joga(jogador, tabela);
     }
 }
