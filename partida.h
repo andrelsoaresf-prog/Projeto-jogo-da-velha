@@ -1,13 +1,10 @@
 #ifndef _partida_H_
 #define _partida_H_
 
-typedef struct {
-    int rodada, jogador;
+#include "jogadorTeclado.h"
 
-} partida;
+void configuraJogadores(Jogador *jogador);
+void inicia();
 
-void configuraJogadores(int *jogador);
-void inicia(int jogador, int **tabuleiro, int opcao);
-void joga(int jogador, int **tabuleiro);
 
 #endif

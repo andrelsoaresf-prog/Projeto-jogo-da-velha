@@ -1,17 +1,17 @@
 #include "tabuleiro.h"
 #include <stdio.h>
 
-void desenharTabuleiro(int **tabuleiro){ 
+void desenharTabuleiro(Tabuleiro *tabela){ 
     printf("\033[2J\033[H");
     printf("\n");
 
     for (int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
-            if (tabuleiro[i][j] == 0)
+            if (tabela->M[i][j] == 0)
                 printf(".");
-            else if (tabuleiro[i][j] == 1)
+            else if (tabela->M[i][j] == 1)
                 printf("o");
-            else if (tabuleiro[i][j] == 4)
+            else if (tabela->M[i][j] == 4)
                 printf("x");
             
             if (j < 2)
@@ -23,12 +23,12 @@ void desenharTabuleiro(int **tabuleiro){
     }
 }
 
-int temVencedor(int **tabuleiro){
+int temVencedor(Tabuleiro *tabela){
     int soma = 0;
 
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            soma += tabuleiro[i][j];
+            soma += tabela->M[i][j];
         }
         if (soma == 3)
             return 1;
@@ -41,7 +41,7 @@ int temVencedor(int **tabuleiro){
 
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            soma += tabuleiro[j][i];
+            soma += tabela->M[j][i];
         }
         if (soma == 3)
             return 1;
@@ -53,7 +53,7 @@ int temVencedor(int **tabuleiro){
     }
 
     for (int i = 0; i < 3; i++){
-        soma += tabuleiro[i][i];
+        soma += tabela->M[i][i];
     }
 
     if (soma == 3)
@@ -64,7 +64,7 @@ int temVencedor(int **tabuleiro){
             soma = 0;
 
     for (int i = 0; i < 3; i++){
-        soma += tabuleiro[i][2 - i];
+        soma += tabela->M[i][2 - i];
     }
     
     if (soma == 3)
@@ -77,15 +77,13 @@ int temVencedor(int **tabuleiro){
     return 0;
 }
 
-void marcarJogada(int x, int y, int jogador, int **tabuleiro){
+void marcarJogada(jogada posicao, int jogador, Tabuleiro *tabela){
 
-    if (jogador == 1 && tabuleiro[x][y] == 0){
-        tabuleiro[x][y] = 1;
-    } else if (jogador == 2 && tabuleiro[x][y] == 0){
-        tabuleiro[x][y] = 4;
-    } else {
-        printf("valor indefinido");
+    if (jogador == 1 && tabela->M[posicao.x][posicao.y] == 0){
+        tabela->M[posicao.x][posicao.y] = 1;
+    } else if (jogador == 2 && tabela->M[posicao.x][posicao.y] == 0){
+        tabela->M[posicao.x][posicao.y] = 4;
     }
 
-    desenharTabuleiro(tabuleiro);
+    desenharTabuleiro(tabela);
 }

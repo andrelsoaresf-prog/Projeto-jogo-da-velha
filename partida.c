@@ -2,88 +2,57 @@
 #include <stdio.h>
 #include "tabuleiro.h"
 #include "jogadorIA.h"
+#include "jogadorTeclado.h"
 
-void configuraJogadores(int *jogador){
+
+void configuraJogadores(Jogador *jogador){
     int selecao;
-    printf("\nDefina quem vai jogar primeiro (1 para o, 2 para x): "); scanf("%d", &selecao);
+    printf("\nDefina quem vai jogar primeiro\n");
+    printf("Digite 1 para o\n");
+    printf("Digite 2 para x\n"); 
+    scanf("%d", &selecao);
 
     if (selecao != 1 && selecao != 2){
         printf("\nNumero invalido! Digite novamente!");
         configuraJogadores(jogador);
     } else {
-        *jogador = selecao;
+        jogador->tipo = selecao;
     }
 }
 
-void inicia(int jogador, int **tabuleiro, int opcao){
-    partida ctrlPartida;
-    ctrlPartida.rodada = 1; 
-    ctrlPartida.jogador = jogador;
-    
-    if (opcao == 1){
-        while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
-            joga(ctrlPartida.jogador, tabuleiro);
-            ctrlPartida.rodada++;
-            if(ctrlPartida.rodada % 2 == 0){
-                ctrlPartida.jogador = 2;
-            } else{
-                ctrlPartida.jogador = 1;
-            }
-        }
-        while(temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 2){
-            joga(ctrlPartida.jogador, tabuleiro);
-            ctrlPartida.rodada++;
-            if(ctrlPartida.rodada % 2 == 0){
-                ctrlPartida.jogador = 1;
-            } else{
-                ctrlPartida.jogador = 2;
-            }
-        }
+void inicia(int selecionar){
+    Tabuleiro tabela;
+    Jogador jogadorAtual;
+    int rodada = 1;
 
-        if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
-        printf("Resultado: Empate! Deu velha!!");
-        }
+    configuraJogadores(&jogadorAtual);
 
-        if(temVencedor(tabuleiro) == 1){
-            printf("Resultado: Jogador 1 venceu!");
-        } 
-    
-        if(temVencedor(tabuleiro) == 2){
-            printf("Resultado: Jogador 2 venceu!");
-        }
+    for(int i = 0; i < 2; i++){
+        for(int j = 0; j < 2; j++){
+            tabela.M[i][j] = 0;
+        }}
 
-    } else 
-    if (opcao == 2){
-        while (temVencedor(tabuleiro) == 0 && ctrlPartida.rodada < 10 && jogador == 1){
-            if (ctrlPartida.rodada % 2 == 1){
-                regras(tabuleiro);
-                ctrlPartida.rodada++;
-            }
-            else {
-                joga(ctrlPartida.jogador, tabuleiro);
-                ctrlPartida.rodada++;
-            }
-        }
-        if(ctrlPartida.rodada == 10 && temVencedor(tabuleiro) == 0){
-        printf("Resultado: Empate! Deu velha!!");
-        }
+    desenharTabuleiro(&tabela);
 
-        if(temVencedor(tabuleiro) == 2){
-            printf("Resultado: A IA venceu!");
-        }
+    while (temVencedor(&tabela) == 0 && rodada < 10){
+        joga(jogadorAtual.tipo, &tabela);
+        rodada++;
+        if (jogadorAtual.tipo == 1)
+            jogadorAtual.tipo = 2;
+        else
+            jogadorAtual.tipo = 1;
         
     }
-}
+    
+    if(rodada == 10 && temVencedor(&tabela) == 0){
+        printf("Resultado: Empate! Deu velha!!");
+    }
 
-void joga(int jogador, int **tabuleiro){
-    int x, y;
-
-    printf("\nDefina a linha da jogada: "); scanf("%d", &x);
-    printf("\nDefina a coluna da jogada: "); scanf("%d", &y);
-    if (x>=0 && x<3 && y>=0 && y<3 && tabuleiro[x][y]==0){
-        marcarJogada(x, y, jogador, tabuleiro);
-    } else{
-        printf("\nPosicao invalida! Escolha novamente!");
-        joga(jogador, tabuleiro);
+    if(temVencedor(&tabela) == 1){
+        printf("Resultado: Jogador 1 venceu!");
+    } 
+    
+    if(temVencedor(&tabela) == 2){
+        printf("Resultado: Jogador 2 venceu!");
     }
 }
