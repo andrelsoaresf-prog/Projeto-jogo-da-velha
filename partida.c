@@ -7,9 +7,9 @@
 
 void configuraJogadores(Jogador *jogador){
     int selecao;
-    printf("Qual modo de jogo deseja jogar");
-    printf("Digite 1 - JOGADOR X JOGADOR");
-    printf("Digite 2 - JOGADOR X IA");
+    printf("Qual modo de jogo deseja jogar\n");
+    printf("Digite 1 - JOGADOR X JOGADOR\n");
+    printf("Digite 2 - JOGADOR X IA\n");
     scanf("%d", &selecao);
 
     if(selecao == 1){
@@ -58,19 +58,27 @@ void inicia(int selecionar){
             }
         }
         else if (jogadorAtual.modo == 2){
-            
+            if(rodada % 2 == 1){
+                regras(&tabela);
+                rodada++;
+            }
+            else{
+                joga(jogadorAtual.tipo, &tabela);
+                rodada++;
+            }
         }
     }
     
-    if(rodada == 10 && temVencedor(&tabela) == 0){
+    if(rodada == 10 && temVencedor(&tabela) == 0)
         printf("Resultado: Empate! Deu velha!!");
-    }
 
-    if(temVencedor(&tabela) == 1){
+    if(temVencedor(&tabela) == 2 && jogadorAtual.modo == 2)
+        printf("Resultado: IA venceu!");
+
+    if(temVencedor(&tabela) == 1 && jogadorAtual.modo == 0)
         printf("Resultado: Jogador 1 venceu!");
-    } 
-    
-    if(temVencedor(&tabela) == 2){
+
+    if (temVencedor(&tabela) == 2 && jogadorAtual.modo == 0)
         printf("Resultado: Jogador 2 venceu!");
-    }
+    
 }
