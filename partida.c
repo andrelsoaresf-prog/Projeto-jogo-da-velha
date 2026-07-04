@@ -23,7 +23,7 @@ void configuraJogadores(Jogador *jogador){
             configuraJogadores(jogador);
         } else {
             jogador->tipo = selecao;
-            jogador->modo = 0;
+            jogador->modo = 1;
         }
     } else if(selecao == 2){
         jogador->tipo = 1;
@@ -46,7 +46,7 @@ void inicia(){
     desenharTabuleiro(&tabela);
 
     while (temVencedor(&tabela) == 0 && rodada < 10){
-        if (jogadorAtual.modo == 0){
+        if (jogadorAtual.modo == 1){
             if (jogadorAtual.tipo == 1){
                 joga(jogadorAtual.tipo, &tabela);
                 rodada++;
@@ -75,10 +75,10 @@ void inicia(){
     if(temVencedor(&tabela) == 2 && jogadorAtual.modo == 2)
         printf("Resultado: IA venceu!\n");
 
-    if(temVencedor(&tabela) == 1 && jogadorAtual.modo == 0)
+    if(temVencedor(&tabela) == 1 && jogadorAtual.modo == 1)
         printf("Resultado: Jogador 1 venceu!\n");
 
-    if (temVencedor(&tabela) == 2 && jogadorAtual.modo == 0)
+    if (temVencedor(&tabela) == 2 && jogadorAtual.modo == 1)
         printf("Resultado: Jogador 2 venceu!\n");
     
 }
