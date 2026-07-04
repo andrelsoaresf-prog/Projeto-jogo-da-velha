@@ -83,8 +83,6 @@ void marcarJogada(jogada posicao, int jogador, Tabuleiro *tabela){
         tabela->M[posicao.x][posicao.y] = 1;
     } else if (jogador == 2 && tabela->M[posicao.x][posicao.y] == 0){
         tabela->M[posicao.x][posicao.y] = 4;
-    } else {
-        printf("valor indefinido");
     }
 
     desenharTabuleiro(tabela);

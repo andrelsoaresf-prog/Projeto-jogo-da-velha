@@ -7,8 +7,10 @@
 void joga(int jogador, Tabuleiro *tabela){
     jogada posicao;
 
-    printf("\nDefina a linha da jogada: "); scanf("%d", &posicao.x);
-    printf("\nDefina a coluna da jogada: "); scanf("%d", &posicao.y);
+    printf("\nDefina a linha da jogada(1 a 3): "); scanf("%d", &posicao.x);
+    printf("\nDefina a coluna da jogada(1 a 3): "); scanf("%d", &posicao.y);
+    posicao.x--;
+    posicao.y--;
     if (posicao.x>=0 && posicao.x<3 && posicao.y>=0 && posicao.y<3 && tabela->M[posicao.x][posicao.y]==0){
         marcarJogada(posicao, jogador, tabela);
     } else{

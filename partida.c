@@ -22,7 +22,7 @@ void configuraJogadores(Jogador *jogador){
 void inicia(){
     Tabuleiro tabela;
     Jogador jogadorAtual;
-    int rodada = 0;
+    int rodada = 1;
 
     configuraJogadores(&jogadorAtual);
 
