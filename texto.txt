@@ -1,0 +1,2 @@
+gcc main.c tabuleiro.c partida.c jogadorTeclado.c jogadorIA.c -o main
+./main

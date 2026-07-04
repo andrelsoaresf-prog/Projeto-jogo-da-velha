@@ -213,11 +213,11 @@ void regras(Tabuleiro *tabela){
 }
 
 void aleatorio(Tabuleiro *tabela){
-    int x = rand() % 3;
-    int y = rand() % 3;
-    if (tabela->M[x][y] == 0){
-        tabela->M[x][y] = 4;
-    } else{
-        aleatorio(tabela);
-    }
+    int x, y;
+    do {
+        x = rand() % 3;
+        y = rand() % 3;
+    } while (tabela->M[x][y] != 0); // Sorteia até achar uma vazia
+    
+    tabela->M[x][y] = 4;
 }

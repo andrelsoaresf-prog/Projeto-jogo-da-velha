@@ -70,15 +70,15 @@ void inicia(){
     }
     
     if(rodada == 10 && temVencedor(&tabela) == 0)
-        printf("Resultado: Empate! Deu velha!!");
+        printf("Resultado: Empate! Deu velha!!\n");
 
     if(temVencedor(&tabela) == 2 && jogadorAtual.modo == 2)
-        printf("Resultado: IA venceu!");
+        printf("Resultado: IA venceu!\n");
 
     if(temVencedor(&tabela) == 1 && jogadorAtual.modo == 0)
-        printf("Resultado: Jogador 1 venceu!");
+        printf("Resultado: Jogador 1 venceu!\n");
 
     if (temVencedor(&tabela) == 2 && jogadorAtual.modo == 0)
-        printf("Resultado: Jogador 2 venceu!");
+        printf("Resultado: Jogador 2 venceu!\n");
     
 }

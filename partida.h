@@ -6,5 +6,4 @@
 void configuraJogadores(Jogador *jogador);
 void inicia();
 
-
 #endif
