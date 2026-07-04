@@ -43,3 +43,35 @@ void aceitar(jogadorRemoto *remoto, int porta){
 
     printf("Adversario remoto conectado com sucesso!\n");
 }
+
+void conecta(jogadorRemoto *remoto, char *ip, int porta){
+    struct sockaddr_in servidor_addr;
+
+    remoto->socketComunicacao = socket(AF_INET, SOCK_STREAM, 0);
+    if (remoto->socketComunicacao < 0) {
+        perror("Erro ao criar socket do cliente");
+        exit(EXIT_FAILURE);
+    }
+
+    servidor_addr.sin_family = AF_INET;
+    servidor_addr.sin_port = htons(porta);
+
+    if (inet_pton(AF_INET, ip, &servidor_addr.sin_addr) <= 0) {
+        perror("Endereco IP invalido");
+        close(remoto->socketComunicacao);
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Tentando conectar ao jogador em %s:%d...\n", ip, porta);
+
+    if (connect(remoto->socketComunicacao, (struct sockaddr *)&servidor_addr, sizeof(servidor_addr)) < 0) {
+        perror("Erro ao conectar ao adversario");
+        close(remoto->socketComunicacao);
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Conectado ao adversario com sucesso!\n");
+
+    remoto->socketServidor = -1;
+}
+

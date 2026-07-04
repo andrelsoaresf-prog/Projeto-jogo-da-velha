@@ -9,5 +9,6 @@ typedef struct {
 
 
 void aceitar(jogadorRemoto *remoto, int porta);
+void conecta(jogadorRemoto *remoto, char *ip, int porta);
 
 #endif
