@@ -7,16 +7,27 @@
 
 void configuraJogadores(Jogador *jogador){
     int selecao;
-    printf("\nDefina quem vai jogar primeiro\n");
-    printf("Digite 1 para o\n");
-    printf("Digite 2 para x\n"); 
+    printf("Qual modo de jogo deseja jogar");
+    printf("Digite 1 - JOGADOR X JOGADOR");
+    printf("Digite 2 - JOGADOR X IA");
     scanf("%d", &selecao);
 
-    if (selecao != 1 && selecao != 2){
-        printf("\nNumero invalido! Digite novamente!");
-        configuraJogadores(jogador);
-    } else {
-        jogador->tipo = selecao;
+    if(selecao == 1){
+        printf("\nDefina quem vai jogar primeiro\n");
+        printf("Digite 1 para o\n");
+        printf("Digite 2 para x\n"); 
+        scanf("%d", &selecao);
+
+        if (selecao != 1 && selecao != 2){
+            printf("\nNumero invalido! Digite novamente!");
+            configuraJogadores(jogador);
+        } else {
+            jogador->tipo = selecao;
+            jogador->modo = 0;
+        }
+    } else if(selecao == 2){
+        jogador->tipo = 1;
+        jogador->modo = 2;
     }
 }
 
@@ -35,13 +46,20 @@ void inicia(int selecionar){
     desenharTabuleiro(&tabela);
 
     while (temVencedor(&tabela) == 0 && rodada < 10){
-        joga(jogadorAtual.tipo, &tabela);
-        rodada++;
-        if (jogadorAtual.tipo == 1)
-            jogadorAtual.tipo = 2;
-        else
-            jogadorAtual.tipo = 1;
-        
+        if (jogadorAtual.modo == 0){
+            if (jogadorAtual.tipo == 1){
+                joga(jogadorAtual.tipo, &tabela);
+                rodada++;
+                jogadorAtual.tipo = 2;
+            } else {
+                joga(jogadorAtual.tipo, &tabela);
+                rodada++;
+                jogadorAtual.tipo = 1;
+            }
+        }
+        else if (jogadorAtual.modo == 2){
+            
+        }
     }
     
     if(rodada == 10 && temVencedor(&tabela) == 0){

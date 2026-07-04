@@ -5,6 +5,7 @@
 
 typedef struct {
     int tipo;
+    int modo;
 } Jogador;
 
 void joga(int jogador, Tabuleiro *tabela);
