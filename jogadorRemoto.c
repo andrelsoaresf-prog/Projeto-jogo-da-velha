@@ -81,3 +81,18 @@ void enviarJogadaJR(jogadorRemoto *remoto, jogada msg){
         printf("Erro ao enviar jogada para o adversario remoto.\n");
     }
 }
+
+void jogaJR(jogadorRemoto *remoto, Tabuleiro *tabela){
+    jogada msg;
+
+    printf("Aguardando a jogada do adversario remoto...\n");
+
+    int bytes_recebidos = recv(remoto->socketComunicacao, &msg, sizeof(jogada), 0);
+
+    if (bytes_recebidos <= 0) {
+        printf("O adversario desconectou ou ocorreu um erro.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    marcarJogada(msg, remoto->tipo, tabela);
+}
