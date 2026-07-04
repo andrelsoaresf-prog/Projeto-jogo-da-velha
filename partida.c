@@ -31,15 +31,15 @@ void configuraJogadores(Jogador *jogador){
     }
 }
 
-void inicia(int selecionar){
+void inicia(){
     Tabuleiro tabela;
     Jogador jogadorAtual;
     int rodada = 1;
 
     configuraJogadores(&jogadorAtual);
 
-    for(int i = 0; i < 2; i++){
-        for(int j = 0; j < 2; j++){
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
             tabela.M[i][j] = 0;
         }}
 
