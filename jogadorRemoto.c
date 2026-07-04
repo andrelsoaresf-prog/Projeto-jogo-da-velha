@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-void aceitar(jogadorRemoto *remoto, int porta){
+void aceitarJR(jogadorRemoto *remoto, int porta){
     struct sockaddr_in endereco;
     socklen_t endereco_len = sizeof(endereco);
 
@@ -44,7 +44,7 @@ void aceitar(jogadorRemoto *remoto, int porta){
     printf("Adversario remoto conectado com sucesso!\n");
 }
 
-void conecta(jogadorRemoto *remoto, char *ip, int porta){
+void conectaJR(jogadorRemoto *remoto, char *ip, int porta){
     struct sockaddr_in servidor_addr;
 
     remoto->socketComunicacao = socket(AF_INET, SOCK_STREAM, 0);
@@ -75,3 +75,9 @@ void conecta(jogadorRemoto *remoto, char *ip, int porta){
     remoto->socketServidor = -1;
 }
 
+void enviarJogadaJR(jogadorRemoto *remoto, jogada msg){
+    int bytes_enviados = send(remoto->socketComunicacao, &msg, sizeof(jogada), 0);
+    if (bytes_enviados <= 0) {
+        printf("Erro ao enviar jogada para o adversario remoto.\n");
+    }
+}

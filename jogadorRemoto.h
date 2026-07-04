@@ -1,5 +1,6 @@
 #ifndef _jogadorRemoto_H_
 #define _jogadorRemoto_H_
+#include "tabuleiro.h"
 
 typedef struct {
     int tipo;
@@ -8,7 +9,8 @@ typedef struct {
 }jogadorRemoto;
 
 
-void aceitar(jogadorRemoto *remoto, int porta);
-void conecta(jogadorRemoto *remoto, char *ip, int porta);
+void aceitarJR(jogadorRemoto *remoto, int porta);
+void conectaJR(jogadorRemoto *remoto, char *ip, int porta);
+void enviarJogadaJR(jogadorRemoto *remoto, jogada msg);
 
 #endif
