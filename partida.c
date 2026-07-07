@@ -1,5 +1,6 @@
 #include "partida.h"
 #include <stdio.h>
+#include <unistd.h> 
 #include "tabuleiro.h"
 #include "jogadorTeclado.h"
 #include "jogadorRemoto.h"
@@ -13,7 +14,7 @@ void inicia(int servidor, char *ip, int porta){
     Tabuleiro tabela;
     Jogador jogadorAtual;
     jogadorRemoto adversarioRemoto;
-    int rodada = 0;
+    int rodada = 1;
 
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -58,7 +59,7 @@ void inicia(int servidor, char *ip, int porta){
         }
     }
     
-    if(rodada == 10 && temVencedor(&tabela) == 0){
+    if(rodada >= 9 && temVencedor(&tabela) == 0){
         printf("Resultado: Empate! Deu velha!!");
     }
 
@@ -69,4 +70,9 @@ void inicia(int servidor, char *ip, int porta){
     if(temVencedor(&tabela) == 2){
         printf("Resultado: Jogador servidor venceu!");
     }
+
+    close(adversarioRemoto.socketComunicacao);
+
+    if (servidor)
+        close(adversarioRemoto.socketServidor);
 }

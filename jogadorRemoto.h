@@ -6,7 +6,7 @@ typedef struct {
     int tipo;
     int socketServidor;
     int socketComunicacao;
-}jogadorRemoto;
+} jogadorRemoto;
 
 
 void aceitarJR(jogadorRemoto *remoto, int porta);

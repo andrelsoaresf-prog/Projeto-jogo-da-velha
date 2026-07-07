@@ -16,6 +16,11 @@ void aceitarJR(jogadorRemoto *remoto, int porta){
         exit(EXIT_FAILURE);
     }
 
+    int ativado = 1;
+    if (setsockopt(remoto->socketServidor, SOL_SOCKET, SO_REUSEADDR, &ativado, sizeof(ativado)) < 0) {
+        perror("Erro no setsockopt (SO_REUSEADDR)");
+    }
+
     endereco.sin_family = AF_INET;
     endereco.sin_addr.s_addr = INADDR_ANY; 
     endereco.sin_port = htons(porta);
@@ -79,6 +84,7 @@ void enviarJogadaJR(jogadorRemoto *remoto, Jogada msg){
     int bytes_enviados = send(remoto->socketComunicacao, &msg, sizeof(Jogada), 0);
     if (bytes_enviados <= 0) {
         printf("Erro ao enviar jogada para o adversario remoto.\n");
+        exit(EXIT_FAILURE);
     }
 }
 
