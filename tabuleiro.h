@@ -4,7 +4,7 @@
 typedef struct {
     int x;
     int y;
-} jogada;
+} Jogada;
 
 typedef struct {
     int M[3][3];
@@ -12,6 +12,6 @@ typedef struct {
 
 void desenharTabuleiro(Tabuleiro *tabela);
 int temVencedor(Tabuleiro *tabela);
-void marcarJogada(jogada posicao, int jogador, Tabuleiro *tabela);
+void marcarJogada(Jogada posicao, int jogador, Tabuleiro *tabela);
 
 #endif

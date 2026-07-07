@@ -4,6 +4,7 @@
 void desenharTabuleiro(Tabuleiro *tabela){ 
     printf("\033[2J\033[H");
     printf("\n");
+    printf("\n");
 
     for (int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -77,7 +78,7 @@ int temVencedor(Tabuleiro *tabela){
     return 0;
 }
 
-void marcarJogada(jogada posicao, int jogador, Tabuleiro *tabela){
+void marcarJogada(Jogada posicao, int jogador, Tabuleiro *tabela){
 
     if (jogador == 1 && tabela->M[posicao.x][posicao.y] == 0){
         tabela->M[posicao.x][posicao.y] = 1;
