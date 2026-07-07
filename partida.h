@@ -8,7 +8,7 @@ typedef struct {
 
 } partida;
 
-void configuraJogadores(Jogador *jogador);
-void inicia();
+void configuraJogadores(Jogador *jogador, int tipo_selecionado);
+void inicia(int servidor, char *ip, int porta);
 
 #endif

@@ -2,29 +2,18 @@
 #include <stdio.h>
 #include "tabuleiro.h"
 #include "jogadorTeclado.h"
+#include "jogadorRemoto.h"
 
-void configuraJogadores(Jogador *jogador){
-    int selecao;
-    printf("\nDefina quem vai jogar primeiro\n");
-    printf("Digite 1 para o\n");
-    printf("Digite 2 para x\n"); 
-    scanf("%d", &selecao);
-
-    if (selecao != 1 && selecao != 2){
-        printf("\nNumero invalido! Digite novamente!");
-        configuraJogadores(jogador);
-    } else {
-        jogador->tipo = selecao;
-    }
+void configuraJogadores(Jogador *jogador, int tipo_selecionado){
+        jogador->tipo = tipo_selecionado;
 }
 
 
-void inicia(){
+void inicia(int servidor, char *ip, int porta){
     Tabuleiro tabela;
     Jogador jogadorAtual;
+    jogadorRemoto adversarioRemoto;
     int rodada = 0;
-
-    configuraJogadores(&jogadorAtual);
 
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
@@ -32,15 +21,41 @@ void inicia(){
         }
     }
 
+    if (servidor){
+        configuraJogadores(&jogadorAtual, 2);
+        adversarioRemoto.tipo = 1;
+        aceitarJR(&adversarioRemoto, porta);
+    } else {
+        configuraJogadores(&jogadorAtual, 1);
+        adversarioRemoto.tipo = 2;
+        conectaJR(&adversarioRemoto, ip, porta);
+    }
+
     desenharTabuleiro(&tabela);
 
     while (temVencedor(&tabela) == 0 && rodada < 10){
-        joga(jogadorAtual.tipo, &tabela);
-        rodada++;
-        if (jogadorAtual.tipo == 1)
-            jogadorAtual.tipo = 2;
-        else
-            jogadorAtual.tipo = 1;
+        if (servidor) {
+            Jogada minha_jogada = joga(jogadorAtual.tipo, &tabela);
+            enviarJogadaJR(&adversarioRemoto, minha_jogada);
+            rodada++;
+
+            if (temVencedor(&tabela) != 0 || rodada >= 9)
+                break;
+            
+            jogaJR(&adversarioRemoto, &tabela);
+            rodada++;
+
+        }else {
+            jogaJR(&adversarioRemoto, &tabela);
+            rodada++;
+
+            if (temVencedor(&tabela) != 0 || rodada >= 9)
+                break;
+
+            Jogada minha_jogada = joga(jogadorAtual.tipo, &tabela);
+            enviarJogadaJR(&adversarioRemoto, minha_jogada);
+            rodada++;
+        }
     }
     
     if(rodada == 10 && temVencedor(&tabela) == 0){
@@ -48,10 +63,10 @@ void inicia(){
     }
 
     if(temVencedor(&tabela) == 1){
-        printf("Resultado: Jogador 1 venceu!");
+        printf("Resultado: Jogador cliente venceu!");
     } 
     
     if(temVencedor(&tabela) == 2){
-        printf("Resultado: Jogador 2 venceu!");
+        printf("Resultado: Jogador servidor venceu!");
     }
 }

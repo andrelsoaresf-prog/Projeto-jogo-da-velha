@@ -11,7 +11,7 @@ typedef struct {
 
 void aceitarJR(jogadorRemoto *remoto, int porta);
 void conectaJR(jogadorRemoto *remoto, char *ip, int porta);
-void enviarJogadaJR(jogadorRemoto *remoto, jogada msg);
+void enviarJogadaJR(jogadorRemoto *remoto, Jogada msg);
 void jogaJR(jogadorRemoto *remoto, Tabuleiro *tabela);
 
 #endif
