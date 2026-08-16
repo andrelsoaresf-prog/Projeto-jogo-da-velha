@@ -4,182 +4,48 @@
 #include <stdlib.h>
 #include <time.h>
 
+int regra1(Tabuleiro *tabela, int valor_alvo) {
+
+    for (int i = 0; i < 3; i++) {
+        if (tabela->M[i][0] + tabela->M[i][1] + tabela->M[i][2] == valor_alvo) {
+            if (tabela->M[i][0] == 0) { tabela->M[i][0] = 4; return 1; }
+            if (tabela->M[i][1] == 0) { tabela->M[i][1] = 4; return 1; }
+            if (tabela->M[i][2] == 0) { tabela->M[i][2] = 4; return 1; }
+        }
+    }
+
+    for (int j = 0; j < 3; j++) {
+        if (tabela->M[0][j] + tabela->M[1][j] + tabela->M[2][j] == valor_alvo) {
+            if (tabela->M[0][j] == 0) { tabela->M[0][j] = 4; return 1; }
+            if (tabela->M[1][j] == 0) { tabela->M[1][j] = 4; return 1; }
+            if (tabela->M[2][j] == 0) { tabela->M[2][j] = 4; return 1; }
+        }
+    }
+
+    if (tabela->M[0][0] + tabela->M[1][1] + tabela->M[2][2] == valor_alvo) {
+        if (tabela->M[0][0] == 0) { tabela->M[0][0] = 4; return 1; }
+        if (tabela->M[1][1] == 0) { tabela->M[1][1] = 4; return 1; }
+        if (tabela->M[2][2] == 0) { tabela->M[2][2] = 4; return 1; }
+    }
+
+    if (tabela->M[0][2] + tabela->M[1][1] + tabela->M[2][0] == valor_alvo) {
+        if (tabela->M[0][2] == 0) { tabela->M[0][2] = 4; return 1; }
+        if (tabela->M[1][1] == 0) { tabela->M[1][1] = 4; return 1; }
+        if (tabela->M[2][0] == 0) { tabela->M[2][0] = 4; return 1; }
+    }
+
+    return 0; 
+}
+
 void regras(Tabuleiro *tabela){
-    if(tabela->M[0][0] + tabela->M[0][1] == 8 && tabela->M[0][2] == 0)
-        tabela->M[0][2] = 4;
     
-    else if (tabela->M[0][1] + tabela->M[0][2] == 8 && tabela->M[0][0] == 0)
-        tabela->M[0][0] = 4;
-    
-    else if (tabela->M[0][0] + tabela->M[0][2] == 8 && tabela->M[0][1] == 0)
-        tabela->M[0][1] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[1][1] == 8 && tabela->M[1][2] ==0)
-        tabela->M[1][2] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[1][2] == 8 && tabela->M[1][0] == 0)
-        tabela->M[1][0] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[1][2] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[2][1] == 8 && tabela->M[2][2] == 0)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[2][1] + tabela->M[2][2] == 8 && tabela->M[2][0] == 0)
-        tabela->M[2][0] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[2][2] == 8 && tabela->M[2][1] == 0)
-        tabela->M[2][1] = 4;
-    
-    
+    if(regra1(tabela, 8)){
+        desenharTabuleiro(tabela);
+        return;
+    }
 
-    else
-    if (tabela->M[0][0] + tabela->M[1][0] == 8 && tabela->M[2][0] == 0)
-        tabela->M[2][0] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[2][0] == 8 && tabela->M[0][0] == 0)
-        tabela->M[0][0] = 4;
-    
-    else if (tabela->M[0][0] + tabela->M[2][0] == 8 && tabela->M[1][0] == 0)
-        tabela->M[1][0] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[1][1] == 8 && tabela->M[2][1] == 0)
-        tabela->M[2][1] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[2][1] == 8 && tabela->M[0][1] == 0)
-        tabela->M[0][1] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[2][1] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[0][2] + tabela->M[1][2] == 8 && tabela->M[2][2] == 0)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[1][2] + tabela->M[2][2] == 8 && tabela->M[0][2] == 0)
-        tabela->M[0][2] = 4;
-    
-    else if (tabela->M[0][2] + tabela->M[2][2] == 8 && tabela->M[1][2] == 0)
-        tabela->M[1][2] = 4;
-    
-    
-
-    else
-    if (tabela->M[0][0] + tabela->M[1][1] == 8 && tabela->M[2][2] == 0)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[2][2] == 8 && tabela->M[0][0] == 0)
-        tabela->M[0][0] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[1][1] == 8 && tabela->M[0][2] == 0)
-        tabela->M[0][2] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[0][2] == 8 && tabela->M[2][0] == 0)
-        tabela->M[2][0] = 4;
-    
-    
-    
-    else
-    if(tabela->M[0][0] + tabela->M[0][1] == 2 && tabela->M[0][2] == 0)
-        tabela->M[0][2] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[0][2] == 2 && tabela->M[0][0] == 0)
-        tabela->M[0][0] = 4;
-    
-    else if (tabela->M[0][0] + tabela->M[0][2] == 2 && tabela->M[0][1] == 0)
-        tabela->M[0][1] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[1][1] == 2 && tabela->M[1][2] ==0)
-        tabela->M[1][2] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[1][2] == 2 && tabela->M[1][0] == 0)
-        tabela->M[1][0] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[1][2] == 2 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[2][1] == 2 && tabela->M[2][2] == 0)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[2][1] + tabela->M[2][2] == 2 && tabela->M[2][0] == 0)
-        tabela->M[2][0] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[2][2] == 2 && tabela->M[2][1] == 0)
-        tabela->M[2][1] = 4;
-    
-    
-
-    else 
-    if (tabela->M[0][0] + tabela->M[1][0] == 2 && tabela->M[2][0] == 0)
-        tabela->M[2][0] = 4;
-    
-    else if (tabela->M[1][0] + tabela->M[2][0] == 2 && tabela->M[0][0] == 0)
-        tabela->M[0][0] = 4;
-    
-    else if (tabela->M[0][0] + tabela->M[2][0] == 2 && tabela->M[1][0] == 0)
-        tabela->M[1][0] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[1][1] == 2 && tabela->M[2][1] == 0)
-        tabela->M[2][1] = 4;
-    
-    else if (tabela->M[1][1] + tabela->M[2][1] == 2 && tabela->M[0][1] == 0)
-        tabela->M[0][1] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[2][1] == 2 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[0][2] + tabela->M[1][2] == 2 && tabela->M[2][2] == 0)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[1][2] + tabela->M[2][2] == 2 && tabela->M[0][2] == 0)
-        tabela->M[0][2] = 4;
-    
-    else if (tabela->M[0][2] + tabela->M[2][2] == 2 && tabela->M[1][2] == 0)
-        tabela->M[1][2] = 4;
-    
-    
-
-    else
-    if (tabela->M[0][0] + tabela->M[2][2] == 8 && tabela->M[1][0] + tabela->M[2][0] + tabela->M[2][1] == 0 && tabela->M[1][1] == 1)
-        tabela->M[2][0] = 4;
-    
-    else if (tabela->M[0][0] + tabela->M[2][2] == 8 && tabela->M[0][1] + tabela->M[0][2] + tabela->M[1][2] == 0 && tabela->M[1][1] == 1)
-        tabela->M[0][2] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[0][2] == 8 && tabela->M[2][1] + tabela->M[2][2] + tabela->M[1][2] == 0 && tabela->M[1][1] == 1)
-        tabela->M[2][2] = 4;
-    
-    else if (tabela->M[2][0] + tabela->M[0][2] == 8 && tabela->M[1][0] + tabela->M[0][0] + tabela->M[0][1] == 0 && tabela->M[1][1] == 1)
-        tabela->M[0][0] = 4;
-    
-    
-
-    else
-    if (tabela->M[0][0] + tabela->M[2][0] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[0][2] + tabela->M[2][2] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[0][1] + tabela->M[1][2] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    else if (tabela->M[2][1] + tabela->M[1][2] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-
-    else if (tabela->M[1][0] + tabela->M[2][1] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-        
-    else if (tabela->M[1][0] + tabela->M[0][1] == 8 && tabela->M[1][1] == 0)
-        tabela->M[1][1] = 4;
-    
-    
-
-    else
     if (tabela->M[1][1] == 0)
         tabela->M[1][1] = 4;
-       
-
      
     else 
     if (tabela->M[0][0] == 1 && tabela->M[2][2] == 0)
